@@ -46,7 +46,7 @@ export async function POST(req: Request) {
     }
   }
 
-  const orderId = `ORD-${Date.now()}-${Math.floor(1000 + Math.random() * 9000)}`
+  const orderId = `ORD-${Date.now()}-${crypto.randomUUID().slice(0, 8)}`
   const totalAmount = items.reduce((s: number, i: { unitPrice: number; quantity: number }) => s + i.unitPrice * i.quantity, 0)
   const totalCost = items.reduce((s: number, i: { costPrice: number; quantity: number }) => s + i.costPrice * i.quantity, 0)
 

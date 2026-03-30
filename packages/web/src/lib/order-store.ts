@@ -149,7 +149,7 @@ export function transitionOrder(
 // --- Order CRUD ---
 function generateOrderId(): string {
   const ts = Date.now()
-  const rand = Math.floor(1000 + Math.random() * 9000)
+  const rand = typeof crypto !== "undefined" ? crypto.randomUUID().slice(0, 8) : Math.floor(1000 + Math.random() * 9000)
   return `ORD-${ts}-${rand}`
 }
 
