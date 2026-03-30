@@ -71,8 +71,8 @@ export default function KitchenPage() {
     const interval = setInterval(() => {
       refresh()
       setTick((t) => t + 1)
-    }, 2000)
-    return () => { clearInterval(interval) }
+    }, 30000)
+    return () => clearInterval(interval)
   }, [refresh])
 
   const handleTransition = async (orderId: string, newStatus: OrderStatus) => {
@@ -114,7 +114,7 @@ export default function KitchenPage() {
           <p className="text-gray-500 text-2xl">ไม่มีออเดอร์ที่ต้องทำ 👍</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {orders.map((order) => {
             const nextStatuses = getValidNextStatuses(order.status)
             const isLoading = transitioning.has(order.orderId)
