@@ -14,6 +14,9 @@ export interface MenuItem {
   unitPrice: number
   costPrice: number
   specialInstructions?: string
+  selectedSize?: string
+  sizeExtraPrice?: number
+  selectedAddOns?: { name: string; price: number }[]
 }
 
 export interface MenuItemTemplate {
@@ -24,6 +27,8 @@ export interface MenuItemTemplate {
   costPrice: number
   isAvailable: boolean
   description?: string
+  sizes?: { label: string; extraPrice: number }[]
+  addOns?: { name: string; price: number }[]
 }
 
 export interface OrderDetails {

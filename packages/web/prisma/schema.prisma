@@ -26,7 +26,7 @@ model Order {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
-  transitions OrderTransition[]
+  transitions OrderTransition?
   income      IncomeRecord?
 
   @@index([channel])
@@ -34,17 +34,19 @@ model Order {
 }
 
 model OrderTransition {
-  id         String @id @default(cuid())
-  orderId    String
-  fromStatus String
-  toStatus   String
-  timestamp  BigInt
-  actor      String
-  reason     String?
+  id            String  @id @default(cuid())
+  orderId       String  @unique
+  receivedAt    BigInt?   // สร้างออเดอร์
+  confirmedAt   BigInt?   // ยืนยันออเดอร์
+  preparingAt   BigInt?   // เริ่มทำ
+  readyAt       BigInt?   // เสร็จแล้ว
+  pickedUpAt    BigInt?   // มารับ
+  deliveredAt   BigInt?   // ส่งมอบสำเร็จ
+  cancelledAt   BigInt?   // ยกเลิก
+  cancelReason  String?
+  lastActor     String?   // พนักงานที่อัปเดตล่าสุด
 
   order Order @relation(fields: [orderId], references: [orderId])
-
-  @@index([orderId])
 }
 
 model IncomeRecord {
